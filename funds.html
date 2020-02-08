@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Zhe's Funds</title>
+
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/modules/data.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+		<style type='text/css'>
+		/* DivTable.com */
+		.divTable{
+			display: table;
+			width: 100%;
+		}
+		.divTableRow {
+			display: table-row;
+		}
+		.divTableHeading {
+			background-color: #EEE;
+			display: table-header-group;
+			font-weight: bold;
+		}
+		.divTableCell, .divTableHead {
+			display: table-cell;
+			padding: 3px 10px;
+			border-top: 1px solid grey;
+		}
+		.divTableCell.last {
+			border-bottom: 1px solid grey;
+		}
+		.divTableFoot {
+			background-color: #EEE;
+			display: table-footer-group;
+			font-weight: bold;
+		}
+		.divTableBody {
+			display: table-row-group;
+		}
+
+		li{
+			margin: 5px 0;
+			font-size: 1.2em;
+		}
+		p{
+			margin: 8px 0;
+			font-size: 1.2em;
+		}
+		.button {
+	    		background-color: #3387a2;
+	    		border: none;
+	    		color: white;
+	    		padding: 12px 23px;
+			font-family: "Helvetica Neue", sans-serif;
+			font-weight: 300;
+			font-size: 1.1em;
+	    		text-align: center;
+	    		text-decoration: none;
+	    		display: inline-block;
+	    		margin: 15px 2px;
+	    		cursor: pointer;
+		}
+		.right {
+			text-align: right;
+		}
+		.price{
+			color: #3387a2;
+			font-family: "Helvetica Neue", sans-serif;
+			font-size: 40px;
+			font-weight: 300;
+			margin: 0;
+		}
+		</style>
+
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.get('ZLFund-SP500.csv', function(csv) {
+				// parse csv file
+				var lines = csv.split('\n');
+				var lastPrice = lines[lines.length-1].split(',')[1];
+				var dateAsOf = lines[lines.length-1].split(',')[0];
+
+				document.getElementById("price-ZL").innerHTML = "$" + lastPrice;
+				document.getElementById("date-ZL").innerHTML = "As of " + dateAsOf;
+			});
+			$.get('ZLFund_BMF.csv', function(csv) {
+				// parse csv file
+				var lines = csv.split('\n');
+				var lastPrice = lines[lines.length-1].split(',')[1];
+				var dateAsOf = lines[lines.length-1].split(',')[0];
+
+				document.getElementById("price-BMF").innerHTML = "$" + lastPrice;
+				document.getElementById("date-BMF").innerHTML = "As of " + dateAsOf;
+			});
+			$.get('HLPartners.csv', function(csv) {
+				// parse csv file
+				var lines = csv.split('\n');
+				var lastPrice = lines[lines.length-1].split(',')[1];
+				var dateAsOf = lines[lines.length-1].split(',')[0];
+
+				document.getElementById("price-HL").innerHTML = "$" + lastPrice;
+				document.getElementById("date-HL").innerHTML = "As of " + dateAsOf;
+			});
+		});
+		</script>
+	</head>
+
+
+	<body>
+		<h1 style="text-align:center; margin: 50px auto;">Zhe's Funds</h1>
+
+		<div class="divTable" style="width: 800px; margin: 0 auto">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div class="divTableCell">
+						<h2>ZLFund</h2>
+						<ul>
+							<li>Inception date: 11/30/2014</li>
+							<li>Assets: ETFs, stocks, options, P2P lending, funds</li>
+							<li>Fund manager: Zhe Liu</li>
+							<li>Features:</li>
+							<ul>
+								<li>Long-term, diversified, index investing</li>
+								<li>"Core-satellite" investment style</li>
+							</ul>
+							<li>Website: <a href="http://zlfund.weebly.com" target="_blank">zlfund.weebly.com</a></li>
+						</ul>
+					</div>
+					<div class="divTableCell right">
+						<h2>&nbsp;</h2>
+						<p align="right">NAV/Share</p>
+						<p id="price-ZL" class="price" align="right"></p>
+						<p id="date-ZL" align="right"></p>
+						<a href="http://www.columbia.edu/~zl2349/zlfund.html" target="_blank" class="button">Performance</a>
+					</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell">
+						<h2>ZLFund BMF Investment Fund</h2>
+						<ul>
+							<li>Inception date: 1/18/2017</li>
+							<li>Assets: Bitcoin margin lending</li>
+							<li>Fund manager: Zhe Liu</li>
+							<li>Features:</li>
+							<ul>
+								<li>Provide dollar margin financing to Bitcoin traders</li>
+								<li>Algorithmic trading</li>
+							</ul>
+							<!-- <li>Website:</li> -->
+						</ul>
+					</div>
+					<div class="divTableCell right">
+						<h2>&nbsp;</h2>
+						<p align="right">NAV/Share</p>
+						<p id="price-BMF" class="price" align="right"></p>
+						<p id="date-BMF" align="right"></p>
+						<a href="http://www.columbia.edu/~zl2349/zlfundBMF.html" target="_blank" class="button">Performance</a>
+					</div>
+				</div>
+				<div class="divTableRow">
+					<div class="divTableCell last">
+						<h2>H&amp;L Partners Put Write Strategy Fund</h2>
+						<ul>
+							<li>Inception date: 9/30/2016</li>
+							<li>Assets: Options, ETFs, Treasury bills/notes</li>
+							<li>Fund managers: Zhe Liu, Pu He</li>
+							<li>Features:</li>
+							<ul>
+								<li>Periodic put options selling</li>
+								<li>Diversified into US, Developed and Emerging markets</li>
+							</ul>
+							<!-- <li>Website:</li> -->
+						</ul>
+					</div>
+					<div class="divTableCell last right">
+						<h2>&nbsp;</h2>
+						<p align="right">NAV/Share</p>
+						<p id="price-HL" class="price" align="right"></p>
+						<p id="date-HL" align="right"></p>
+						<a href="http://www.columbia.edu/~zl2349/hlpartners.html" target="_blank" class="button">Performance</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- DivTable.com -->
+
+		<p align="center" style="margin: 30px auto"> &copy; 2014-2020 Zhe Liu. All rights reserved. </p>
+	</body>
+</html>
