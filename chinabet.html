@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>中证500vs房价</title>
+
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/modules/data.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.get('chinabet.csv', function(csv) {
+				// parse csv file
+				var lines = csv.split('\n');
+				var dateMax = new Date(lines[lines.length-1].split(',')[0]);
+				var lastPrice = lines[lines.length-1].split(',')[1];
+				var dateAsOf = lines[lines.length-1].split(',')[0];
+				var endLastYear = new Date(dateMax.getFullYear(),0,0); // returns Dec 31 of last year
+				var daysYTD = Math.ceil((dateMax-endLastYear)/(1000*60*60*24))-1; // to mitigate day-light-saving-time effect
+
+				// document.getElementById("price").innerHTML = "$" + lastPrice;
+				// document.getElementById("date").innerHTML = "As of " + dateAsOf;
+				// document.getElementById("test1").innerHTML = "endLastYear" + endLastYear;
+				// document.getElementById("test2").innerHTML = "daysYTD" + daysYTD;
+
+				// generate first chart
+			    $('#container').highcharts('StockChart', {
+					credits : {
+						enabled: false
+					},
+					rangeSelector : {
+						enabled: false,
+						selected : 5,
+						buttons: [{
+							type: 'month',
+							count: 1,
+							text: '1m'
+						}, {
+							type: 'month',
+							count: 3,
+							text: '3m'
+						}, {
+							type: 'month',
+							count: 6,
+							text: '6m'
+						}, {
+							type: 'day',
+							count: daysYTD,
+							text: 'YTD'
+						}, {
+							type: 'year',
+							count: 1,
+							text: '1y'
+						}, {
+							type: 'all',
+							text: 'All'
+						}]
+					},
+					navigator :{
+						enabled: false
+					},
+					scrollbar :{
+						enabled: false
+					},
+	     		data :{
+						csv: csv,
+						// endColumn: 1,
+						startRow: 0,
+						firstRowAsNames: true
+					},
+        	legend: {
+						enabled: true,
+						align: 'right',
+						// verticalAlign: 'top',
+						// y: 70,
+						layout: 'proximate',
+						floating: false,
+						itemStyle: {
+							fontSize: "16px"
+						}
+        	},
+					title : {
+						text : '中证500点数 vs 城市平均房价',
+						style: {
+							fontWeight: 'bold',
+							fontSize: "18px"
+						}
+					},
+					xAxis: {
+            // type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%m/%Y'
+            },
+						endOnTick: true
+          },
+					yAxis:[{
+            title: {
+              text: '点数'
+            },
+            min: 0,
+            opposite: false
+          }, {
+            title: {
+              text: '万元/平米',
+              // style: {
+              //   color: Highcharts.getOptions().colors[2]
+              // }
+            },
+            // labels: {
+            //   style: {
+            //     color: Highcharts.getOptions().colors[2]
+            //   }
+            // },
+            min: 0,
+            allowDecimals: false,
+            opposite: true
+          }],
+					tooltip: {
+						valueDecimals: 2,
+						xDateFormat: '%m/%e/%Y',
+						// dateTimeLabelFormats: {
+            //   month: '%m/%Y'
+            // }
+					},
+					series : [{
+						// name: 'H&L Partners',
+						// color: '#0070C0'
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					},{
+						yAxis: 1,
+						tooltip: {
+              valueSuffix: '万元/平米'
+            },
+					}]
+			    });
+
+				// generate second chart
+				$('#container2').highcharts('StockChart', {
+					credits : {
+						enabled: false
+					},
+					rangeSelector : {
+						enabled: false,
+						selected : 5,
+						buttons: [{
+							type: 'month',
+							count: 1,
+							text: '1m'
+						}, {
+							type: 'month',
+							count: 3,
+							text: '3m'
+						}, {
+							type: 'month',
+							count: 6,
+							text: '6m'
+						}, {
+							type: 'day',
+							count: daysYTD,
+							text: 'YTD'
+						}, {
+							type: 'year',
+							count: 1,
+							text: '1y'
+						}, {
+							type: 'all',
+							text: 'All'
+						}]
+					},
+					navigator :{
+						enabled: false
+					},
+					scrollbar :{
+						enabled: false
+					},
+	     		data :{
+						csv: csv,
+						startRow: 0,
+						firstRowAsNames: true
+					},
+        	legend: {
+						enabled: true,
+						align: 'right',
+						// verticalAlign: 'top',
+						// y: 70,
+						layout: 'proximate',
+						floating: false,
+						itemStyle: {
+							fontSize: "16px"
+						}
+        	},
+					title : {
+						text : '累积回报',
+						style: {
+							fontWeight: 'bold',
+							fontSize: "18px"
+						}
+					},
+					chart : {
+						marginLeft: 60,
+						marginRight: 160
+					},
+					xAxis: {
+            // type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%m/%Y'
+            },
+						endOnTick: true
+          },
+					yAxis: {
+						labels: {
+							formatter: function () {
+								return (this.value > 0 ? ' +' : '') + this.value + '%';
+							}
+						},
+						plotLines: [{
+							value: 0,
+							width: 2,
+							color: 'silver'
+						}]
+					},
+					plotOptions: {
+						series: {
+							compare: 'percent'
+						}
+					},
+					tooltip: {
+						pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+						valueDecimals: 2,
+						xDateFormat: '%m/%e/%Y',
+					},
+					// series : [{
+					// 	name: 'CSI 500',
+					// 	color: '#0070C0'
+          //   			}, {
+					// 	name: 'S&P 500',
+					// 	color: '#A53010'
+					// 				}, {
+					// 	name: 'Benchmark',
+					// 	color: '#006600'
+					// }]
+			    });
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<h1 style="text-align:center;">中证500 vs 房价</h1>
+
+		<div style="text-align:left; margin-bottom: 1cm;">
+			<p style="width: 60%; margin: 0 auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本网页记录自2018年6月起中证500指数和若干中国大城市平均房价的变化。中证500指数取每月末数值，中国大城市月度平均房价数据取自<a href="http://creprice.cn" style="text-decoration:none" target="_blank">“中国房价行情”网站</a>。
+			</p>
+		</div>
+
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 800px; height: 500px; margin: 0 auto"></div>
+
+		<div id="container2" style="width: 800px; height: 500px; margin: 0 auto"></div>
+
+		<p align="center"> &copy; 2018-2023 Zhe Liu </p>
+	</body>
+</html>
