@@ -80,28 +80,33 @@
 						}
 					},
 					yAxis: [{
-						// labels: {
-						// 	format: '{value}°C',
-						// 	style: {
-						// 		color: Highcharts.getOptions().colors[2]
-						// 	}
-						// },
+						labels: {
+							// format: '{value}°C',
+							style: {
+								color: '#0070C0'
+							}
+						},
 						title: {
 							text: 'NAV/Share',
-							// style: {
-							// 	color: Highcharts.getOptions().colors[2]
-							// }
+							style: {
+								color: '#0070C0'
+							}
 						},
 						opposite: false
 					}, {
 						labels: {
 							formatter: function () {
 								return this.value * 100 + '%';
+							},
+							style: {
+								color: '#A53010'
 							}
-							// format: '{value}%'
 						},
 						title: {
-							text: '7-day Annualized Yield'
+							text: '7-day Annualized Yield',
+							style: {
+								color: '#A53010'
+							}
 						}
 					}],
 					tooltip: {
