@@ -87,7 +87,7 @@
 				document.getElementById("price-ZL").innerHTML = "$" + lastPrice;
 				document.getElementById("date-ZL").innerHTML = "As of " + dateAsOf;
 			});
-			$.get('ZLFund_BMF.csv', function(csv) {
+			$.get('ZLFund_CMF.csv', function(csv) {
 				// parse csv file
 				var lines = csv.split('\n');
 				var lastPrice = lines[lines.length-1].split(',')[1];
