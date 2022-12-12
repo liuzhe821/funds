@@ -13,7 +13,7 @@
 		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$.get('prices.csv', function(csv) {
+			$.get('ZLFund_CMF.csv', function(csv) {
 				// parse csv file
 				var lines = csv.split('\n');
 				var dateMax = new Date(lines[lines.length-1].split(',')[0]);
