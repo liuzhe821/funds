@@ -91,7 +91,8 @@
 							// style: {
 							// 	color: Highcharts.getOptions().colors[2]
 							// }
-						}
+						},
+						opposite: true
 					}, {
 						labels: {
 							// formatter: function () {
@@ -100,9 +101,8 @@
 							format: '{value}%'
 						},
 						title: {
-							text: '7-day Average Yield'
-						},
-						opposite: true
+							text: '7-day Annualized Yield'
+						}
 					}],
 					tooltip: {
 						valueDecimals: 2
@@ -111,7 +111,7 @@
 						name: 'ZLFund CMF',
 						color: '#0070C0'
 					}, {
-						name: '7-day Avg Yield',
+						name: '7-day Annualized Yield',
 						color: '#A53010',
 						yAxis: 1
 					}]
@@ -131,7 +131,7 @@
 	</div>
 
 	<!-- 3. Add the container -->
-	<div id="container" style="width: 800px; height: 500px; margin: 0 auto"></div>
+	<div id="container" style="width: 1000px; height: 500px; margin: 0 auto"></div>
 	<p align="center"> &copy; 2017-2023 ZLFund, LP </p>
 </body>
 
