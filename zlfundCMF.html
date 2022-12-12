@@ -80,12 +80,12 @@
 						}
 					},
 					yAxis: [{
-						labels: {
-							format: '{value}',
-							// style: {
-							// 	color: Highcharts.getOptions().colors[2]
-							// }
-						},
+						// labels: {
+						// 	format: '{value}°C',
+						// 	style: {
+						// 		color: Highcharts.getOptions().colors[2]
+						// 	}
+						// },
 						title: {
 							text: 'NAV/Share',
 							// style: {
@@ -94,9 +94,10 @@
 						}
 					}, {
 						labels: {
-							formatter: function () {
-								return this.value *100 + '%';
-							}
+							// formatter: function () {
+							// 	return this.value *100 + '%';
+							// }
+							format: '{value}%'
 						},
 						title: {
 							text: '7-day Average Yield'
